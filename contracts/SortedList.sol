@@ -193,11 +193,19 @@ library SortedList {
         }
         uint256 position = elements / 2;
         if (elements % 2 == 0) {
-            uint256 sum = getValue(self, position, _delegate) + getValue(self, position - 1, _delegate);
-            return sum / 2;
+            return average(getValue(self, position, _delegate), getValue(self, position - 1, _delegate));
         } else {
             return getValue(self, position, _delegate);
         }
+    }
+
+    /**
+     * @dev Returns the average of two numbers. The result is rounded towards zero. 
+     * (https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/Math.sol)
+     */
+    function average(uint256 a, uint256 b) internal pure returns (uint256) {
+        // (a + b) / 2 can overflow, so we distribute
+        return (a / 2) + (b / 2) + ((a % 2 + b % 2) / 2);
     }
 
 }

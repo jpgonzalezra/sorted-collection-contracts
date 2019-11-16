@@ -22,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ripio/sorted-collection.git"
+    "url": "git+https://github.com/jpgonzalezra/sorted-collection.git"
   },
   "author": "Joaquin Pablo Gonzalez <jpgonzalezra@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ripio/sorted-collection/issues"
+    "url": "https://github.com/jpgonzalezra/sorted-collection/issues"
   },
-  "homepage": "https://github.com/ripio/sorted-collection#readme",
+  "homepage": "https://github.com/jpgonzalez/sorted-collection#readme",
   "devDependencies": {
     "eslint-plugin-import": "^2.18.0",
     "eslint-utils": ">=1.4.1",
