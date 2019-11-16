@@ -13,8 +13,8 @@ library SortedList {
     uint256 private constant NULL = 0;
     uint256 private constant HEAD = 0;
 
-    bool private constant LEFT = false;
-    bool private constant RIGHT = true;
+    bool private constant PREV = false;
+    bool private constant NEXT = true;
 
     struct List {
         // node_id => prev or next => node_id
@@ -28,8 +28,8 @@ library SortedList {
      * @return bool true if node exists, false otherwise
      */
     function exists(List storage self, uint256 _node) internal view returns (bool) {
-        if (self.list[_node][LEFT] == HEAD && self.list[_node][RIGHT] == HEAD) {
-            return (self.list[HEAD][RIGHT] == _node);
+        if (self.list[_node][PREV] == HEAD && self.list[_node][NEXT] == HEAD) {
+            return (self.list[HEAD][NEXT] == _node);
         }
         return true;
     }
@@ -59,11 +59,11 @@ library SortedList {
         if (!exists(self, _node)) {
             return (false, 0, 0);
         }
-        return (true, self.list[_node][LEFT], self.list[_node][RIGHT]);
+        return (true, self.list[_node][PREV], self.list[_node][NEXT]);
     }
 
     /**
-     * @dev Returns the link of a node `_node` in direction `RIGHT`.
+     * @dev Returns the link of a node `_node` in direction `NEXT`.
      * @param self stored linked list from contract
      * @param _node id of the node to step from
      * @return bool, uint256 true if node exists or false otherwise, next node
@@ -80,14 +80,14 @@ library SortedList {
      */
     function getAdjacent(List storage self, uint256 _node) internal view returns (bool, uint256) {
         if (exists(self, _node)) {
-            return (true, self.list[_node][RIGHT]);
+            return (true, self.list[_node][NEXT]);
         }
         return (false, 0);
 
     }
 
     /**
-     * @dev Creates a bidirectional link between two nodes on direction `_direction` (LEFT or RIGHT)
+     * @dev Creates a bidirectional link between two nodes on direction `_direction` (PREV or NEXT)
      * @param self stored linked list from contract
      * @param _node first node for linking
      * @param _link  node to link to in the _direction
@@ -113,18 +113,18 @@ library SortedList {
             return false;
         }
         uint256 position = getPosition(self, _node, _delegate);
-        uint256 c = self.list[position][LEFT];
+        uint256 c = self.list[position][PREV];
         createLink(
             self,
             position,
             _node,
-            LEFT
+            PREV
         );
         createLink(
             self,
             _node,
             c,
-            LEFT
+            PREV
         );
         return true;
     }
@@ -139,7 +139,7 @@ library SortedList {
     function getPosition(List storage self, uint256 _node, address _delegate) internal view returns (uint256) {
         (, uint256 next) = getAdjacent(self, HEAD);
         while (next != 0 && SortedListDelegate(_delegate).getValue(_node) > SortedListDelegate(_delegate).getValue(next)) {
-            next = self.list[next][RIGHT];
+            next = self.list[next][NEXT];
         }
         return next;
     }
@@ -154,7 +154,7 @@ library SortedList {
     function getValue(List storage self, uint256 _position, address _delegate) internal view returns (uint256) {
         (, uint256 next) = getAdjacent(self, HEAD);
         for (uint256 i = 0; i < _position; i++) {
-            next = self.list[next][RIGHT];
+            next = self.list[next][NEXT];
         }
         return SortedListDelegate(_delegate).getValue(next);
     }
@@ -171,12 +171,12 @@ library SortedList {
         }
         createLink(
             self,
-            self.list[_node][LEFT],
-            self.list[_node][RIGHT],
-            RIGHT
+            self.list[_node][PREV],
+            self.list[_node][NEXT],
+            NEXT
         );
-        delete self.list[_node][LEFT];
-        delete self.list[_node][RIGHT];
+        delete self.list[_node][PREV];
+        delete self.list[_node][NEXT];
         return _node;
     }
 

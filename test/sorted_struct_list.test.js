@@ -110,7 +110,7 @@ contract('SortedStructListMock', function (accounts) {
             });
 
             describe('getNode', function () {
-                it('LEFT and RIGHT should be HEAD', async function () {
+                it('PREV and NEXT should be HEAD', async function () {
                     const node = await this.list.getNode(aliceId);
                     expect(node[0]).to.be.equal(true);
                     expect(node[1]).to.be.bignumber.equal(HEAD);
@@ -171,28 +171,28 @@ contract('SortedStructListMock', function (accounts) {
                     charlyNode = await this.list.getNode(charlyId);
                 });
 
-                it('aliceNode LEFT should be init', async function () {
+                it('aliceNode PREV should be init', async function () {
                     const init = new BN(0);
                     expect(aliceNode[1]).to.be.bignumber.equal(init);
                 });
 
-                it('aliceNode RIGHT should be charlyNode', async function () {
+                it('aliceNode NEXT should be charlyNode', async function () {
                     expect(aliceNode[2]).to.be.bignumber.equal(charlyId);
                 });
 
-                it('charlyNode LEFT should be aliceNode', async function () {
+                it('charlyNode PREV should be aliceNode', async function () {
                     expect(charlyNode[1]).to.be.bignumber.equal(aliceId);
                 });
 
-                it('charlyNode RIGHT should be bobId', async function () {
+                it('charlyNode NEXT should be bobId', async function () {
                     expect(charlyNode[2]).to.be.bignumber.equal(bobId);
                 });
 
-                it('bobNode LEFT should be aliceNode', async function () {
+                it('bobNode PREV should be aliceNode', async function () {
                     expect(bobNode[1]).to.be.bignumber.equal(charlyId);
                 });
 
-                it('bobNode RIGHT should be HEAD', async function () {
+                it('bobNode NEXT should be HEAD', async function () {
                     expect(bobNode[2]).to.be.bignumber.equal(HEAD);
                 });
 
@@ -237,19 +237,19 @@ contract('SortedStructListMock', function (accounts) {
                             expect(aliceNode[2]).to.be.bignumber.equal(HEAD);
                         });
 
-                        it('bobNode LEFT should be charlyNode', async function () {
+                        it('bobNode PREV should be charlyNode', async function () {
                             expect(bobNode[1]).to.be.bignumber.equal(charlyId);
                         });
 
-                        it('bobNode RIGHT should be HEAD', async function () {
+                        it('bobNode NEXT should be HEAD', async function () {
                             expect(bobNode[2]).to.be.bignumber.equal(HEAD);
                         });
 
-                        it('charlyNode LEFT should be HEAD', async function () {
+                        it('charlyNode PREV should be HEAD', async function () {
                             expect(charlyNode[1]).to.be.bignumber.equal(HEAD);
                         });
 
-                        it('charlyNode RIGHT should be bobNode', async function () {
+                        it('charlyNode NEXT should be bobNode', async function () {
                             expect(charlyNode[2]).to.be.bignumber.equal(bobId);
                         });
                     });
@@ -268,20 +268,20 @@ contract('SortedStructListMock', function (accounts) {
                             expect(bobNode[2]).to.be.bignumber.equal(HEAD);
                         });
 
-                        it('aliceNode LEFT should be charlyNode', async function () {
+                        it('aliceNode PREV should be charlyNode', async function () {
                             const init = new BN(0);
                             expect(aliceNode[1]).to.be.bignumber.equal(init);
                         });
 
-                        it('aliceNode RIGHT should be HEAD', async function () {
+                        it('aliceNode NEXT should be HEAD', async function () {
                             expect(aliceNode[2]).to.be.bignumber.equal(charlyId);
                         });
 
-                        it('charlyNode LEFT should be HEAD', async function () {
+                        it('charlyNode PREV should be HEAD', async function () {
                             expect(charlyNode[1]).to.be.bignumber.equal(aliceId);
                         });
 
-                        it('charlyNode RIGHT should be aliceNode', async function () {
+                        it('charlyNode NEXT should be aliceNode', async function () {
                             expect(charlyNode[2]).to.be.bignumber.equal(HEAD);
                         });
                     });
@@ -300,19 +300,19 @@ contract('SortedStructListMock', function (accounts) {
                             expect(charlyNode[2]).to.be.bignumber.equal(HEAD);
                         });
 
-                        it('aliceNode LEFT should be HEAD', async function () {
+                        it('aliceNode PREV should be HEAD', async function () {
                             expect(aliceNode[1]).to.be.bignumber.equal(HEAD);
                         });
 
-                        it('aliceNode RIGHT should be bobNode', async function () {
+                        it('aliceNode NEXT should be bobNode', async function () {
                             expect(aliceNode[2]).to.be.bignumber.equal(bobId);
                         });
 
-                        it('bobNode LEFT should be aliceNode', async function () {
+                        it('bobNode PREV should be aliceNode', async function () {
                             expect(bobNode[1]).to.be.bignumber.equal(aliceId);
                         });
 
-                        it('bobNode RIGHT should be HEAD', async function () {
+                        it('bobNode NEXT should be HEAD', async function () {
                             expect(bobNode[2]).to.be.bignumber.equal(HEAD);
                         });
                     });
