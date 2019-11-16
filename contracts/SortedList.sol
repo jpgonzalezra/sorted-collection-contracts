@@ -191,11 +191,12 @@ library SortedList {
         if (elements == 0) {
             return 0;
         }
+        uint256 position = elements / 2;
         if (elements % 2 == 0) {
-            uint256 sum = getValue(self, elements / 2, _delegate) + getValue(self, elements / 2 - 1, _delegate);
+            uint256 sum = getValue(self, position, _delegate) + getValue(self, position - 1, _delegate);
             return sum / 2;
         } else {
-            return getValue(self, elements / 2, _delegate);
+            return getValue(self, position, _delegate);
         }
     }
 
