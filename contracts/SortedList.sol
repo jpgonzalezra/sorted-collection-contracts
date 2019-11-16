@@ -73,10 +73,10 @@ library SortedList {
     }
 
     /**
-     * @dev Returns the link of a node `_node` in direction `_direction`.
+     * @dev Returns the link of a node `_node`
      * @param self stored linked list from contract
      * @param _node id of the node to step from
-     * @return bool, uint256 true if node exists or false otherwise, node in _direction
+     * @return bool, uint256 true if node exists or false otherwise
      */
     function getAdjacent(List storage self, uint256 _node) internal view returns (bool, uint256) {
         if (exists(self, _node)) {
