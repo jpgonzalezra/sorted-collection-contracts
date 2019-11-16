@@ -38,6 +38,12 @@ contract('SortedStructListMock', function (accounts) {
         });
 
         describe('median', function () {
+            it('should calculate median (empty list)', async function () {
+                const array = [];
+                const medianSortedList = await this.list.median();
+                const medianSortedNative = new BN(median(array));
+                expect(medianSortedList).to.be.bignumber.equal(medianSortedNative);
+            });
             it('should calculate median (5 elements ramdom)', async function () {
                 const cant = 5;
                 const array = [];

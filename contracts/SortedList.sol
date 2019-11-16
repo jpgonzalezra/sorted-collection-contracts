@@ -188,6 +188,9 @@ library SortedList {
      */
     function median(List storage self, address _delegate) internal view returns (uint256) {
         uint256 elements = sizeOf(self);
+        if (elements == 0) {
+            return 0;
+        }
         if (elements % 2 == 0) {
             uint256 sum = getValue(self, elements / 2, _delegate) + getValue(self, elements / 2 - 1, _delegate);
             return sum / 2;
